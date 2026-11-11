@@ -102,6 +102,15 @@ pub struct GenerateRequest {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub sampling_logprobs_mode: Option<String>,
 
+    /// Return output top logprobs as flat arrays in response metadata instead
+    /// of nested per-token rows
+    #[serde(default)]
+    pub return_flat_raw_output_top_logprobs: bool,
+
+    /// Base64-encode the flat top logprob arrays; unset keeps SGLang's default
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub return_flat_raw_top_logprobs_b64: Option<bool>,
+
     /// Return routed experts, indexer top-k and sampling masks through the
     /// server's output store instead of inline in meta_info
     #[serde(skip_serializing_if = "Option::is_none")]
